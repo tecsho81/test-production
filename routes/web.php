@@ -25,4 +25,10 @@ Route::prefix('items')->group(function () {
     Route::get('/', [App\Http\Controllers\ItemController::class, 'index']);
     Route::get('/add', [App\Http\Controllers\ItemController::class, 'add']);
     Route::post('/add', [App\Http\Controllers\ItemController::class, 'add']);
+    // 編集画面表示
+    Route::get('/edit/{id}', [App\Http\Controllers\ItemController::class, 'edit']);
+    // 編集処理
+    Route::put('/edit/{id}', [App\Http\Controllers\ItemController::class, 'update']);
+    // 削除処理
+    Route::delete('/edit/{id}', [App\Http\Controllers\ItemController::class, 'destroy']);
 });

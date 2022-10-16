@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
+use App\Models\Post;
 
 class ItemController extends Controller
 {
@@ -24,12 +25,9 @@ class ItemController extends Controller
     public function index()
     {
         // 商品一覧取得
-        $items = Item
-            ::where('items.status', 'active')
-            ->select()
-            ->get();
-
-        return view('item.index', compact('items'));
+        $items = Item::all();
+        $type = Item::TYPE;
+        return view('item.index', compact('items', 'type'));
     }
 
     /**
@@ -37,6 +35,7 @@ class ItemController extends Controller
      */
     public function add(Request $request)
     {
+        $type = Item::TYPE;
         // POSTリクエストのとき
         if ($request->isMethod('post')) {
             // バリデーション
@@ -55,6 +54,71 @@ class ItemController extends Controller
             return redirect('/items');
         }
 
-        return view('item.add');
+        return view('item.add', compact('type'));
+
+        
+    }
+
+    /**
+     * 編集画面表示
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $item = Item::find($id);
+        $type = Item::TYPE;
+        return view('item.edit', compact('item', 'type'));
+    }
+
+
+    /**
+     * 更新機能
+     *
+     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        // バリデーション
+        $request->validate(
+            [
+                'name' => 'required|max:100',
+                'type' => 'required',
+                'detail' => 'required|max:500'
+            ],
+            [
+                'name.required' => '*商品名を入力してください',
+                'name.max' => '*商品名は100文字以下で入力してください',
+                'type.required' => '*種別を選択してください',
+                'detail.required' => '*詳細を入力してください',
+                'detail.max' => '*商品名は500文字以下で入力してください'
+            ]
+        );
+
+        $update = [
+            'user_id' => 1, //auth::id()
+            'name' => $request->name,
+            'status' => $request->status ?? "",
+            'type' => $request->type,
+            'detail' => $request->detail
+        ];
+        Item::where('id', $id)->update($update);
+        return redirect('/item');
+    }
+
+    /**
+     * 削除機能
+     *
+     * @param  int  $id
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+        Item::where('id', $id)->delete();
+        return redirect('/item');
     }
 }
