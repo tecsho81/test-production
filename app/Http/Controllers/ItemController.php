@@ -39,9 +39,17 @@ class ItemController extends Controller
         // POSTリクエストのとき
         if ($request->isMethod('post')) {
             // バリデーション
-            $this->validate($request, [
+            $this->validate($request,
+            [
                 'name' => 'required|max:100',
-            ]);
+                'type' => 'required'
+            ],
+            [
+                'name.required' => '商品名を入力してください',
+                'name.max' => '商品名は100文字以下で入力してください',
+                'type.required' => '種別を選択してください',
+            ]
+        );
 
             // 商品登録
             Item::create([
@@ -55,8 +63,6 @@ class ItemController extends Controller
         }
 
         return view('item.add', compact('type'));
-
-        
     }
 
     /**
@@ -87,14 +93,13 @@ class ItemController extends Controller
             [
                 'name' => 'required|max:100',
                 'type' => 'required',
-                'detail' => 'required|max:500'
+                'detail' => 'max:500'
             ],
             [
-                'name.required' => '*商品名を入力してください',
-                'name.max' => '*商品名は100文字以下で入力してください',
-                'type.required' => '*種別を選択してください',
-                'detail.required' => '*詳細を入力してください',
-                'detail.max' => '*商品名は500文字以下で入力してください'
+                'name.required' => '商品名を入力してください',
+                'name.max' => '商品名は100文字以下で入力してください',
+                'type.required' => '種別を選択してください',
+                'detail.max' => '商品名は500文字以下で入力してください'
             ]
         );
 
@@ -106,7 +111,7 @@ class ItemController extends Controller
             'detail' => $request->detail
         ];
         Item::where('id', $id)->update($update);
-        return redirect('/item');
+        return redirect('/items');
     }
 
     /**
@@ -116,9 +121,10 @@ class ItemController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        Item::where('id', $id)->delete();
-        return redirect('/item');
+        $item = Item::findOrFail($id);
+        $item->delete();
+        return redirect('/items');
     }
 }

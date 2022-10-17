@@ -30,5 +30,5 @@ Route::prefix('items')->group(function () {
     // 編集処理
     Route::put('/edit/{id}', [App\Http\Controllers\ItemController::class, 'update']);
     // 削除処理
-    Route::delete('/edit/{id}', [App\Http\Controllers\ItemController::class, 'destroy']);
+    Route::delete('/edit/{id}', [App\Http\Controllers\ItemController::class, 'destroy'])->name('items.destroy');
 });
