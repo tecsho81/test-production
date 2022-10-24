@@ -8,9 +8,6 @@
 
 @section('content')
 <p>Welcome to this beautiful admin panel.</p>
-<div class="input-group-append">
-    <a href="{{ url('items/add') }}" class="btn btn-default">商品登録</a>
-</div>
 @stop
 
 @section('css')
