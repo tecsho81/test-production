@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -27,8 +28,9 @@ class AppServiceProvider extends ServiceProvider
         // if(\App::enviroment(['production']) || \App::enviroment(['develop'])){
         //     \URL::forceScheme('https');
         // }
-        if(config('app.env')==='production' || config('app.env')==='develop'){
+        if (config('app.env') === 'production' || config('app.env') === 'develop') {
             \URL::forceScheme('https');
         }
+        Schema::defaultStringLength(191); // 追加
     }
 }
