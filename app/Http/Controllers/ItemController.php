@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\Post;
+use Illuminate\Support\Facades\DB;
 
 class ItemController extends Controller
 {
@@ -27,6 +28,10 @@ class ItemController extends Controller
         // 商品一覧取得
         $items = Item::all();
         $type = Item::TYPE;
+
+        // ページネーション
+        $items = DB::table('items')->paginate(5);
+
         return view('item.index', compact('items', 'type'));
     }
 
@@ -127,4 +132,5 @@ class ItemController extends Controller
         $item->delete();
         return redirect('/items');
     }
+
 }
