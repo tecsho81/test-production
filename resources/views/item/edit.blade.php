@@ -9,8 +9,6 @@
 @stop
 
 @section('content')
-
-@section('content')
 <div class="row">
     <div class="col-md-10">
         @if ($errors->any())
@@ -22,7 +20,6 @@
             </ul>
         </div>
         @endif
-
         <div class="card card-primary">
             <form method="POST">
                 @csrf
@@ -31,7 +28,6 @@
                     <div>
                         <button type="button" class="btn btn-secondary" onclick="location.href='/items'">戻る</button>
                     </div>
-
                     <!-- 編集フォーム -->
                     <p>
                     <form action="{{ url('item/'.$item->id) }}" method="POST">
@@ -60,7 +56,6 @@
                             </select>
                         </P>
                 </div>
-
                 <div class="card-footer">
                     <!-- 更新ボタン -->
                     <button type="submit" id="update-item-{{ $item->id }}" class="btn btn-primary">更新</button>

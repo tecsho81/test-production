@@ -18,12 +18,15 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Auth::routes();
-
+// ホーム画面表示
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::prefix('items')->group(function () {
+    // 一覧画面表示
     Route::get('/', [App\Http\Controllers\ItemController::class, 'index']);
+    // 登録画面表示
     Route::get('/add', [App\Http\Controllers\ItemController::class, 'add']);
+    // 登録処理
     Route::post('/add', [App\Http\Controllers\ItemController::class, 'add']);
     // 詳細画面表示
     Route::get('/detail/{id}', [App\Http\Controllers\ItemController::class, 'detail']);

@@ -27,8 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // 商品一覧取得
-        $items = Item::where('status', 'active')->orderBy('created_at', 'desc')->take(3)->get();
+        // 車両表示（在庫あり・登録日時最新5件）
+        $items = Item::where('status', 'active')->orderBy('created_at', 'desc')->take(5)->get();
         $type = Item::TYPE;
         return view('home', compact('items', 'type'));
     }

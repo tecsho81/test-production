@@ -56,7 +56,7 @@
                 {{ (($items->currentPage() -1) * $items->perPage() + 1) + (count($items) -1)  }}件表示
             </p>
             @else
-            <p>データがありません。</p>
+            <p>データがありません</p>
             @endif
         </div>
     </div>

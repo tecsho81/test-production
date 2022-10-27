@@ -21,22 +21,20 @@ class ItemController extends Controller
     }
 
     /**
-     * 商品一覧
+     * 一覧画面表示
      */
     public function index()
     {
-        // 商品一覧取得
+        // 一覧取得
         $items = Item::all();
         $type = Item::TYPE;
-
-        // ページネーション
-        $items = DB::table('items')->paginate(10);
-
+        // 更新日時順・ページネーション
+        $items = DB::table('items')->orderBy('updated_at', 'desc')->paginate(10);
         return view('item.index', compact('items', 'type'));
     }
 
     /**
-     * 商品登録
+     * 登録画面表示
      */
     public function add(Request $request)
     {
@@ -47,26 +45,25 @@ class ItemController extends Controller
             $this->validate($request,
             [
                 'name' => 'required|max:100',
-                'type' => 'required'
+                'type' => 'required',
+                'detail' => 'max:500'
             ],
             [
-                'name.required' => '商品名を入力してください',
-                'name.max' => '商品名は100文字以下で入力してください',
-                'type.required' => '種別を選択してください',
+                'name.required' => '車名を入力してください',
+                'name.max' => '車名は100文字以下で入力してください',
+                'type.required' => 'タイプを選択してください',
+                'detail.max' => '詳細は500文字以下で入力してください'
             ]
         );
-
-            // 商品登録
+            // 登録処理
             Item::create([
                 'user_id' => Auth::user()->id,
                 'name' => $request->name,
                 'type' => $request->type,
                 'detail' => $request->detail,
             ]);
-
             return redirect('/items');
         }
-
         return view('item.add', compact('type'));
     }
 
@@ -98,7 +95,7 @@ class ItemController extends Controller
 
 
     /**
-     * 更新機能
+     * 更新処理
      *
      * @param  int  $id
      * @param  \Illuminate\Http\Request  $request
@@ -114,13 +111,12 @@ class ItemController extends Controller
                 'detail' => 'max:500'
             ],
             [
-                'name.required' => '商品名を入力してください',
-                'name.max' => '商品名は100文字以下で入力してください',
-                'type.required' => '種別を選択してください',
-                'detail.max' => '商品名は500文字以下で入力してください'
+                'name.required' => '車名を入力してください',
+                'name.max' => '車名は100文字以下で入力してください',
+                'type.required' => 'タイプを選択してください',
+                'detail.max' => '詳細は500文字以下で入力してください'
             ]
         );
-
         $update = [
             'user_id' => 1, //auth::id()
             'name' => $request->name,
@@ -133,7 +129,7 @@ class ItemController extends Controller
     }
 
     /**
-     * 削除機能
+     * 削除処理
      *
      * @param  int  $id
      * @param Request $request
