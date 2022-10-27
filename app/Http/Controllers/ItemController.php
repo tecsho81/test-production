@@ -71,6 +71,19 @@ class ItemController extends Controller
     }
 
     /**
+     * 詳細画面表示
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function detail($id)
+    {
+        $item = Item::find($id);
+        $type = Item::TYPE;
+        return view('item.detail', compact('item', 'type'));
+    }
+
+    /**
      * 編集画面表示
      *
      * @param  int  $id

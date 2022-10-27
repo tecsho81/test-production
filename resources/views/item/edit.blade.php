@@ -24,62 +24,62 @@
         <div class="card card-primary">
             <form method="POST">
                 @csrf
+                <div class="card-body">
+                    <!-- 戻るボタン -->
+                    <div>
+                        <button type="button" class="btn btn-secondary" onclick="location.href='/items'">戻る</button>
+                    </div>
 
-                <!-- 戻るボタン -->
-                <div style="padding-top: 20px">
-                    <button type="button" class="btn btn-secondary" onclick="location.href='/items'">戻る</button>
+                    <!-- 編集フォーム -->
+                    <p>
+                    <form action="{{ url('item/'.$item->id) }}" method="POST">
+                        {{ csrf_field() }}
+                        {{ method_field('PUT') }}
+                        <p style="margin-bottom: 0">商品名</p>
+                        <p><input type="text" class="form-control" name="name" value="{{ old(('name'), $item->name) }}"></p>
+
+                        <P style="margin-bottom: 0">種別</P>
+                        <p>
+                            <select class="form-control" name="type" value="{{ $item->type }}">
+                                @foreach($type as $key => $value)
+                                <option value="{{ $key }}" {{old('type',$item->type)==$key ? "selected" : ""}}>{{ $value }}</option>
+                                @endforeach
+                            </select>
+                        </P>
+
+                        <p style="margin-bottom: 0">詳細</p>
+                        <p><input type="text" class="form-control" name="detail" value="{{ old(('detail'), $item->detail) }}"></p>
+
+                        <P style="margin-bottom: 0">ステータス</P>
+                        <p>
+                            <select class="form-control" style="padding-left: 10px; margin: 0 0 20px 0;" name="status" value="{{ $item->status }}">
+                                <option value="active" @if($item->status)selected @endif>在庫あり</option>
+                                <option value="" @if(!$item->status)selected @endif>SOLD OUT</option>
+                            </select>
+                        </P>
                 </div>
 
-                <!-- 編集フォーム -->
-                <p>
-                <form action="{{ url('item/'.$item->id) }}" method="POST">
-                    {{ csrf_field() }}
-                    {{ method_field('PUT') }}
-                    <p style="margin-bottom: 0">商品名</p>
-                    <p><input type="text" class="form-control" name="name" value="{{ old(('name'), $item->name) }}"></p>
-
-                    <P style="margin-bottom: 0">種別</P>
-                    <p>
-                        <select class="form-control" name="type" value="{{ $item->type }}">
-                            @foreach($type as $key => $value)
-                            <option value="{{ $key }}" {{old('type',$item->type)==$key ? "selected" : ""}}>{{ $value }}</option>
-                            @endforeach
-                        </select>
-                    </P>
-
-                    <p style="margin-bottom: 0">詳細</p>
-                    <p><input type="text" class="form-control" name="detail" value="{{ old(('detail'), $item->detail) }}"></p>
-
-                    <P style="margin-bottom: 0">ステータス</P>
-                    <p>
-                        <select class="form-control" style="width: 15%; padding-left: 10px; margin: 0 0 20px 0;" name="status" value="{{ $item->status }}">
-                            <option value="active" @if($item->status)selected @endif>有効</option>
-                            <option value="" @if(!$item->status)selected @endif>停止</option>
-                        </select>
-                    </P>
-
+                <div class="card-footer">
                     <!-- 更新ボタン -->
-                    <button type="submit" id="update-item-{{ $item->id }}" class="btn btn-primary" style="margin-top: 30px;">更新</button>
-                </form>
-                </p>
-
-                <!-- 削除ボタン -->
-                <div>
-                    <p style="margin-top: 30px;">
-                    <form action="{{ route('items.destroy', $item) }}" method="post">
-                        @csrf
-                        @method('delete')
-                        <button type="submit" class="btn btn-danger">削除</button>
-                    </form>
-                    </p>
-                </div>
+                    <button type="submit" id="update-item-{{ $item->id }}" class="btn btn-primary">更新</button>
             </form>
+            </p>
+            <!-- 削除ボタン -->
+            <div>
+                <form action="{{ route('items.destroy', $item) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger">削除</button>
+                </form>
+            </div>
         </div>
+    </div>
+</div>
 
-        @stop
+@stop
 
-        @section('css')
-        @stop
+@section('css')
+@stop
 
-        @section('js')
-        @stop
+@section('js')
+@stop
