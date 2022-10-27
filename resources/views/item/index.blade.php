@@ -12,9 +12,9 @@
         <div class="card" style="padding: 10px">
             <div class="card-header">
                 <div class="card-tools">
-                    <div class="input-group input-group-sm">
+                    <div class="input-group">
                         <div class="input-group-append">
-                            <a href="{{ url('items/add') }}" class="btn btn-default">登録</a>
+                            <a href="{{ url('items/add') }}"  class="btn btn-primary">登録</a>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $type[$item->type] }}</td>
-                            <td>@if($item->status)在庫あり @else SOLD OUT @endif</td>
+                            <td>@if($item->status)在庫あり @else <p class="text-danger">SOLD OUT</p> @endif</td>
                             <td>{{ $item->created_at }}</td>
                             <td>{{ $item->updated_at }}</td>
                             <td><a class="btn btn-secondary btn-sm" href="items/detail/{{ $item->id }}">詳細</a></td>

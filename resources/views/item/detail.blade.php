@@ -65,7 +65,7 @@
 
                         <P style="margin-bottom: 0">【在庫】
                         <h6 style="padding-left: 20px;">
-                            @if($item->status)在庫あり @else SOLD OUT @endif
+                            @if($item->status)在庫あり @else <p class="text-danger">SOLD OUT</p> @endif
                         </h6>
                         </P>
 

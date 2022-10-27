@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Item;
+use App\Models\Post;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // 商品一覧取得
+        $items = Item::where('status', 'active')->orderBy('created_at', 'desc')->take(3)->get();
+        $type = Item::TYPE;
+        return view('home', compact('items', 'type'));
     }
 }
