@@ -1,9 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', '商品詳細')
+@section('title')
+{{ $item->name }}詳細
+@stop
 
 @section('content_header')
-<h1>商品詳細</h1>
+<h1>詳細</h1>
 @stop
 
 @section('content')
@@ -36,20 +38,27 @@
                     <form action="{{ url('item/'.$item->id) }}" method="POST">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
-                        <p style="margin-bottom: 0">【商品名】
+
+                        <p style="margin-bottom: 0">【ID】
+                        <h6 style="padding-left: 20px;">
+                            {{ old(('id'), $item->id) }}
+                        </h6>
+                        </p>
+
+                        <p style="margin-bottom: 0">【車名】
                         <h6 style="padding-left: 20px;">
                             {{ old(('name'), $item->name) }}
                         </h6>
                         </p>
 
-                        <P style="margin-bottom: 0">【種別】
+                        <P style="margin-bottom: 0">【タイプ】
                         <h6 style="padding-left: 20px;">
                             {{ $type[$item->type] }}
                         </h6>
                         </P>
 
                         <p style="margin-bottom: 0">【詳細】
-                        <h6 style="padding-left: 20px;">
+                        <h6 style="padding-left: 20px; white-space: pre-line;">
                             {{ old(('detail'), $item->detail) }}
                         </h6>
                         </p>
@@ -68,7 +77,7 @@
 
                         <P style="margin-bottom: 0">【更新日時】
                         <h6 style="padding-left: 20px;">
-                            {{ $item->updated_at }} 
+                            {{ $item->updated_at }}
                         </h6>
                         </P>
                     </form>
@@ -76,10 +85,10 @@
             </form>
         </div>
 
-        @stop
+@stop
 
-        @section('css')
-        @stop
+@section('css')
+@stop
 
-        @section('js')
-        @stop
+@section('js')
+@stop

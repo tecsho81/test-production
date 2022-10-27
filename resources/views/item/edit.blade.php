@@ -1,9 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', '商品編集')
+@section('title')
+{{ $item->name }}編集
+@stop
 
 @section('content_header')
-<h1>商品編集</h1>
+<h1>編集</h1>
 @stop
 
 @section('content')
@@ -35,10 +37,10 @@
                     <form action="{{ url('item/'.$item->id) }}" method="POST">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
-                        <p style="margin-bottom: 0">商品名</p>
+                        <p style="margin-bottom: 0">車名</p>
                         <p><input type="text" class="form-control" name="name" value="{{ old(('name'), $item->name) }}"></p>
 
-                        <P style="margin-bottom: 0">種別</P>
+                        <P style="margin-bottom: 0">タイプ</P>
                         <p>
                             <select class="form-control" name="type" value="{{ $item->type }}">
                                 @foreach($type as $key => $value)
@@ -48,9 +50,9 @@
                         </P>
 
                         <p style="margin-bottom: 0">詳細</p>
-                        <p><input type="text" class="form-control" name="detail" value="{{ old(('detail'), $item->detail) }}"></p>
+                        <p><textarea type="text" class="form-control" name="detail" value="{{ $item->detail }}">{{ old(('detail'), $item->detail) }}</textarea></p>
 
-                        <P style="margin-bottom: 0">ステータス</P>
+                        <P style="margin-bottom: 0">在庫</P>
                         <p>
                             <select class="form-control" style="padding-left: 10px; margin: 0 0 20px 0;" name="status" value="{{ $item->status }}">
                                 <option value="active" @if($item->status)selected @endif>在庫あり</option>

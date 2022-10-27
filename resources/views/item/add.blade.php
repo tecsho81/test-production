@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', '商品登録')
+@section('title', '登録')
 
 @section('content_header')
-<h1>商品登録</h1>
+<h1>登録</h1>
 @stop
 
 @section('content')
@@ -24,12 +24,12 @@
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="name">名前</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="名前">
+                        <label for="name">車名</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="車名を入力" value="{{ old('name') }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="type">種別</label>
+                        <label for="type">タイプ</label>
                         <select class="form-control" name="type">
                             <option value="" style="display: none;"></option>
                             @foreach($type as $key => $value)
@@ -40,7 +40,7 @@
 
                     <div class="form-group">
                         <label for="detail">詳細</label>
-                        <input type="text" class="form-control" id="detail" name="detail" placeholder="詳細説明">
+                        <textarea type="text" class="form-control" id="detail" name="detail" placeholder="詳細を入力">{{ old('detail') }}</textarea>
                     </div>
                 </div>
 

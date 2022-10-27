@@ -30,7 +30,7 @@ class ItemController extends Controller
         $type = Item::TYPE;
 
         // ページネーション
-        $items = DB::table('items')->paginate(5);
+        $items = DB::table('items')->paginate(10);
 
         return view('item.index', compact('items', 'type'));
     }
