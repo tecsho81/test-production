@@ -11,15 +11,6 @@
     <div class="col-12">
         <div class="card" style="padding: 10px">
             <div class="card-header">
-                <div class="card-tools">
-                    <div class="input-group">
-                        <div class="input-group-append">
-                            <a href="{{ url('items/add') }}" class="btn btn-primary">登録</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body table-responsive p-0">
                 <form action="{{ route('items.search') }}" class="form-inline" style="margin-bottom: 25px;">
                     @csrf
                     <input class="form-control mr-sm-1" type="text" name="nameword" placeholder="車名を入力" value="@if (isset($nameword)) {{ $nameword }} @endif" style="width: 20%; margin-right: 10%;">
@@ -36,7 +27,12 @@
                     </select>
                     <button class="btn btn-secondary" type="submit">検索</button>
                 </form>
-
+                <div class="card-tools">
+                    <div class="input-group">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive p-0">
 
                 <table class="table table-hover text-nowrap">
                     <thead>
