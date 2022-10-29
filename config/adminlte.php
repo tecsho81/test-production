@@ -237,13 +237,8 @@ return [
         ],
         [
             'text' => 'アカウント',
-            'url'  => 'users',
+            'url'  => 'users/user',
             'icon' => 'fas fa-user',
-        ],
-        [
-            'text' => '設定',
-            'url'  => 'settings',
-            'icon' => 'fas fa-cog',
         ],
 
         // AdminLTEデフォルト

@@ -21,6 +21,7 @@ Auth::routes();
 // ホーム画面表示
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// アイテム関連
 Route::prefix('items')->group(function () {
     // // 一覧画面表示
     // Route::get('/', [App\Http\Controllers\ItemController::class, 'index']);
@@ -38,4 +39,10 @@ Route::prefix('items')->group(function () {
     Route::delete('/edit/{id}', [App\Http\Controllers\ItemController::class, 'destroy'])->name('items.destroy');
     // 車名検索
     Route::get('/search', [App\Http\Controllers\ItemController::class, 'searchindex'])->name('items.search');
+});
+
+// ユーザー関連
+Route::prefix('users')->group(function () {
+    //ユーザー画面表示
+    Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');   
 });
