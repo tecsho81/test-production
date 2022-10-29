@@ -31,9 +31,11 @@ Route::prefix('items')->group(function () {
     // 詳細画面表示
     Route::get('/detail/{id}', [App\Http\Controllers\ItemController::class, 'detail']);
     // 編集画面表示
-    Route::get('/edit/{id}', [App\Http\Controllers\ItemController::class, 'edit']);
+    Route::get('/edit/{id}', [App\Http\Controllers\ItemController::class, 'edit'])->name('items.edit');
     // 編集処理
     Route::put('/edit/{id}', [App\Http\Controllers\ItemController::class, 'update']);
     // 削除処理
     Route::delete('/edit/{id}', [App\Http\Controllers\ItemController::class, 'destroy'])->name('items.destroy');
+    // キーワード検索
+    Route::get('/Search', [App\Http\Controllers\ItemController::class, 'getIndex'])->name('Search');
 });

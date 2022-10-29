@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable; //追記
 
 class Item extends Model
 {
@@ -12,9 +13,18 @@ class Item extends Model
      * @var array<int, string>
      */
 
+    use Sortable;   // 追記
+    
     protected $table = 'items';
 
     protected $fillable = [
+        'user_id',
+        'name',
+        'type',
+        'detail',
+    ];
+
+    protected $sortable = [
         'user_id',
         'name',
         'type',

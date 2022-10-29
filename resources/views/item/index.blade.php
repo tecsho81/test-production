@@ -14,40 +14,45 @@
                 <div class="card-tools">
                     <div class="input-group">
                         <div class="input-group-append">
-                            <a href="{{ url('items/add') }}"  class="btn btn-primary">登録</a>
+                            <a href="{{ url('items/add') }}" class="btn btn-primary">登録</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>車名</th>
-                            <th>タイプ</th>
-                            <th>在庫</th>
-                            <th>登録日時</th>
-                            <th>更新日時</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($items as $item)
-                        <tr>
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $type[$item->type] }}</td>
-                            <td>@if($item->status)在庫あり @else <p class="text-danger">SOLD OUT</p> @endif</td>
-                            <td>{{ $item->created_at }}</td>
-                            <td>{{ $item->updated_at }}</td>
-                            <td><a class="btn btn-secondary btn-sm" href="items/detail/{{ $item->id }}">詳細</a></td>
-                            <td><a class="btn btn-warning btn-sm" href="items/edit/{{ $item->id }}">編集</a></td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <form action="{{ route('Search') }}" class="form-inline" style="margin-bottom: 25px;">
+                    @csrf
+                    <input class="form-control mr-sm-1" type="text" name="keyword" placeholder="車名を入力" value="@if (isset($keyword)) {{ $keyword }} @endif" style="width: 20%">
+                    <button class="btn btn-secondary" type="submit">検索</button>
+                </form>
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>車名</th>
+                                <th>タイプ</th>
+                                <th>在庫</th>
+                                <th>登録日時</th>
+                                <th>更新日時</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($items as $item)
+                            <tr>
+                                <td>{{ $item->id }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $type[$item->type] }}</td>
+                                <td>@if($item->status)在庫あり @else <p class="text-danger">SOLD OUT</p> @endif</td>
+                                <td>{{ $item->created_at }}</td>
+                                <td>{{ $item->updated_at }}</td>
+                                <td><a class="btn btn-secondary btn-sm" href="items/detail/{{ $item->id }}">詳細</a></td>
+                                <td><a class="btn btn-warning btn-sm" href="items/edit/{{ $item->id }}">編集</a></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
             </div>
             {!! $items->links() !!}
             @if (count($items) >0)

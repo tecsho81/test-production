@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
+use Kyslik\ColumnSortable\Sortable;
 
 class ItemController extends Controller
 {
@@ -30,6 +31,22 @@ class ItemController extends Controller
         $type = Item::TYPE;
         // 更新日時順・ページネーション
         $items = DB::table('items')->orderBy('updated_at', 'desc')->paginate(10);
+        // $items = Item::sortable()->get(); //sortableメソッドを使用
+        return view('item.index', compact('items', 'type'));
+    }
+
+    /**
+     * 検索処理
+     */
+    public function getIndex(Request $rq)
+    {
+        $keyword = $rq->input('keyword');
+        $type = Item::TYPE;
+        $query = Item::query();
+        if (!empty($keyword)) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+        }
+        $items = $query->orderBy('id', 'asc')->orderBy('updated_at', 'desc')->paginate(10);
         return view('item.index', compact('items', 'type'));
     }
 
@@ -42,19 +59,20 @@ class ItemController extends Controller
         // POSTリクエストのとき
         if ($request->isMethod('post')) {
             // バリデーション
-            $this->validate($request,
-            [
-                'name' => 'required|max:100',
-                'type' => 'required',
-                'detail' => 'max:500'
-            ],
-            [
-                'name.required' => '車名を入力してください',
-                'name.max' => '車名は100文字以下で入力してください',
-                'type.required' => 'タイプを選択してください',
-                'detail.max' => '詳細は500文字以下で入力してください'
-            ]
-        );
+            $this->validate(
+                $request,
+                [
+                    'name' => 'required|max:100',
+                    'type' => 'required',
+                    'detail' => 'max:500'
+                ],
+                [
+                    'name.required' => '車名を入力してください',
+                    'name.max' => '車名は100文字以下で入力してください',
+                    'type.required' => 'タイプを選択してください',
+                    'detail.max' => '詳細は500文字以下で入力してください'
+                ]
+            );
             // 登録処理
             Item::create([
                 'user_id' => Auth::user()->id,
@@ -141,5 +159,4 @@ class ItemController extends Controller
         $item->delete();
         return redirect('/items');
     }
-
 }
