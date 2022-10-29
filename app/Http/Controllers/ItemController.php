@@ -38,15 +38,15 @@ class ItemController extends Controller
     /**
      * 検索処理
      */
-    public function getIndex(Request $rq)
+    public function getIndex(Request $request)
     {
-        $keyword = $rq->input('keyword');
+        $keyword = $request->input('keyword');
         $type = Item::TYPE;
         $query = Item::query();
         if (!empty($keyword)) {
             $query->where('name', 'like', '%' . $keyword . '%');
         }
-        $items = $query->orderBy('id', 'asc')->orderBy('updated_at', 'desc')->paginate(10);
+        $items = $query->orderBy('updated_at', 'desc')->paginate(10);
         return view('item.index', compact('items', 'type'));
     }
 
