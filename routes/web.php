@@ -37,5 +37,5 @@ Route::prefix('items')->group(function () {
     // 削除処理
     Route::delete('/edit/{id}', [App\Http\Controllers\ItemController::class, 'destroy'])->name('items.destroy');
     // キーワード検索
-    Route::get('/Search', [App\Http\Controllers\ItemController::class, 'getIndex'])->name('Search');
+    Route::get('/search', [App\Http\Controllers\ItemController::class, 'getIndex'])->name('items.search');
 });

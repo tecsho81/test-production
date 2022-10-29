@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="card-body table-responsive p-0">
-                <form action="{{ route('Search') }}" class="form-inline" style="margin-bottom: 25px;">
+                <form action="{{ route('items.search') }}" class="form-inline" style="margin-bottom: 25px;">
                     @csrf
                     <input class="form-control mr-sm-1" type="text" name="keyword" placeholder="車名を入力" value="@if (isset($keyword)) {{ $keyword }} @endif" style="width: 20%">
                     <button class="btn btn-secondary" type="submit">検索</button>
