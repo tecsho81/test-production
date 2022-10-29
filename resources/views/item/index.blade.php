@@ -20,22 +20,24 @@
                 </div>
             </div>
             <div class="card-body table-responsive p-0">
-                <form action="{{ route('name.search') }}" class="form-inline" style="margin-bottom: 25px;">
+                <form action="{{ route('items.search') }}" class="form-inline" style="margin-bottom: 25px;">
                     @csrf
                     <input class="form-control mr-sm-1" type="text" name="nameword" placeholder="車名を入力" value="@if (isset($nameword)) {{ $nameword }} @endif" style="width: 20%">
-                    <button class="btn btn-secondary" type="submit">検索</button>
-                </form>
-                <form action="{{ route('type.search') }}" class="form-inline" style="margin-bottom: 25px;">
-                    @csrf
-                    <!-- <input class="form-control mr-sm-1" type="text" name="typeword" placeholder="タイプを選択" value="@if (isset($typeword)) {{ $typeword }} @endif" style="width: 20%"> -->
-                    <select class="form-control" name="typeword" placeholder="タイプを選択" value="@if (isset($typeword)) {{ $typeword }} @endif" style="width: 20%">
+                    <select class="form-control" name="typeword" value="@if (isset($typeword)) {{ $typeword }} @endif" style="width: 20%">
                         <option value="" style="display: none;">タイプを選択</option>
                         @foreach($type as $key => $value)
                         <option value="{{$key}}" {{old('type')==$key ? "selected" : ""}}>{{ $value }}</option>
                         @endforeach
                     </select>
+                    <select class="form-control" name="statusword" value="@if (isset($statusword)) {{ $statusword }} @endif" style="width: 20%">
+                        <option value="" style="display: none;">在庫を選択</option>
+                        <option value="active">在庫あり</option>
+                        <option value="">SOLD OUT</option>
+                    </select>
                     <button class="btn btn-secondary" type="submit">検索</button>
                 </form>
+
+
                 <table class="table table-hover text-nowrap">
                     <thead>
                         <tr>
