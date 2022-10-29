@@ -37,12 +37,12 @@
                 <table class="table table-hover text-nowrap">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>車名</th>
-                            <th>タイプ</th>
-                            <th>在庫</th>
-                            <th>登録日時</th>
-                            <th>更新日時</th>
+                            <th>@sortablelink('id', 'ID')</th>
+                            <th>@sortablelink('name', '車名')</th>
+                            <th>@sortablelink('type', 'タイプ')</th>
+                            <th>@sortablelink('status', '在庫')</th>
+                            <th>@sortablelink('created_at', '登録日時')</th>
+                            <th>@sortablelink('updated_at', '更新日時')</th>
                             <th></th>
                             <th></th>
                         </tr>

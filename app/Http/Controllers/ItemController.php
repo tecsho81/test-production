@@ -27,11 +27,10 @@ class ItemController extends Controller
     public function index()
     {
         // 一覧取得
-        $items = Item::all();
+        // $items = Item::all();
         $type = Item::TYPE;
         // 更新日時順・ページネーション
         $items = DB::table('items')->orderBy('updated_at', 'desc')->paginate(10);
-        // $items = Item::sortable()->get(); //sortableメソッドを使用
         return view('item.index', compact('items', 'type'));
     }
 
@@ -54,7 +53,7 @@ class ItemController extends Controller
         if (!empty($statusword)) {
             $query->where('status', 'like', '%' . $statusword . '%');
         }
-        $items = $query->orderBy('updated_at', 'desc')->paginate(10);
+        $items = $query->sortable()->orderBy('updated_at', 'desc')->paginate(10);
         return view('item.index', compact('items', 'type'));
     }
 

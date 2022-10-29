@@ -24,11 +24,13 @@ class Item extends Model
         'detail',
     ];
 
-    protected $sortable = [
-        'user_id',
+    public $sortable = [
+        'id',
         'name',
         'type',
-        'detail',
+        'status',
+        'created_at',
+        'updated_at'
     ];
 
     const TYPE = [
