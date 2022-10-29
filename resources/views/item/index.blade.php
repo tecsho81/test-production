@@ -60,7 +60,7 @@
                     </tbody>
                 </table>
             </div>
-            {!! $items->links() !!}
+            {{$items->appends(request()->query())->links()}}
             @if (count($items) >0)
             <p>全{{ $items->total() }}件中
                 {{ ($items->currentPage() -1) * $items->perPage() + 1}} -

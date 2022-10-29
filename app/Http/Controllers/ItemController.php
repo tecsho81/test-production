@@ -27,7 +27,7 @@ class ItemController extends Controller
     // public function index()
     // {
     //     // 一覧取得
-    //     // $items = Item::all();
+    //     $items = Item::all();
     //     $type = Item::TYPE;
     //     // 更新日時順・ページネーション
     //     $items = DB::table('items')->orderBy('updated_at', 'desc')->paginate(10);
@@ -87,7 +87,7 @@ class ItemController extends Controller
                 'type' => $request->type,
                 'detail' => $request->detail,
             ]);
-            return redirect('/items');
+            return redirect('/items/search');
         }
         return view('item.add', compact('type'));
     }
@@ -150,7 +150,7 @@ class ItemController extends Controller
             'detail' => $request->detail
         ];
         Item::where('id', $id)->update($update);
-        return redirect('/items');
+        return redirect('/items/search');
     }
 
     /**
@@ -164,6 +164,6 @@ class ItemController extends Controller
     {
         $item = Item::findOrFail($id);
         $item->delete();
-        return redirect('/items');
+        return redirect('/items/search');
     }
 }
