@@ -235,6 +235,16 @@ return [
             'url'  => 'items/add',
             'icon' => 'fas fa-edit',
         ],
+        [
+            'text' => 'アカウント',
+            'url'  => 'users',
+            'icon' => 'fas fa-user',
+        ],
+        [
+            'text' => '設定',
+            'url'  => 'settings',
+            'icon' => 'fas fa-cog',
+        ],
 
         // AdminLTEデフォルト
         /*

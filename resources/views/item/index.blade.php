@@ -67,7 +67,7 @@
                 {{ (($items->currentPage() -1) * $items->perPage() + 1) + (count($items) -1)  }}件表示
             </p>
             @else
-            <p>データがありません</p>
+            <p>選択した条件に当てはまる車両はありません</p>
             @endif
         </div>
     </div>

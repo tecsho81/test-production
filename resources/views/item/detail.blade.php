@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('title')
-{{ $item->name }}詳細
+詳細 | {{ $item->name }}
 @stop
 
 @section('content_header')

@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('title')
-{{ $item->name }}編集
+編集 | {{ $item->name }}
 @stop
 
 @section('content_header')
