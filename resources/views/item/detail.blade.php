@@ -28,7 +28,7 @@
                 <div class="card-body">
                     <!-- 戻るボタン -->
                     <div>
-                        <button type="button" class="btn btn-secondary" onclick="location.href='/items'">戻る</button>
+                        <button type="button" class="btn btn-secondary" onclick="location.href='/items/search'">戻る</button>
                     </div>
 
                     <!-- 詳細フォーム -->

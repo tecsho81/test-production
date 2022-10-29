@@ -227,7 +227,7 @@ return [
     'menu' => [
         [
             'text' => '一覧',
-            'url'  => 'items',
+            'url'  => 'items/search',
             'icon' => 'fas fa-list-ul',
         ],
         [

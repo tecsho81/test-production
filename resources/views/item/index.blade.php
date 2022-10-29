@@ -14,18 +14,15 @@
                 <form action="{{ route('items.search') }}" class="form-inline" style="margin-bottom: 25px;">
                     @csrf
                     <input class="form-control mr-sm-1" type="text" name="nameword" placeholder="車名を入力" value="@if (isset($nameword)) {{ $nameword }} @endif" style="width: 20%; margin-right: 10%;">
-                    <select class="form-control" name="typeword" value="@if (isset($typeword)) {{ $typeword }} @endif" style="width: 20%; margin: 0 1% 0 1%;">
+                    <select class="form-control" name="typeword" value="@if (isset($typeword)) {{ $typeword }} @endif" style="width: 20%; margin: 0 2% 0 2%;">
                         <option value="" style="display: none;">タイプを選択</option>
                         @foreach($type as $key => $value)
                         <option value="{{$key}}" {{old('type')==$key ? "selected" : ""}}>{{ $value }}</option>
                         @endforeach
                     </select>
-                    <select class="form-control" name="statusword" value="@if (isset($statusword)) {{ $statusword }} @endif" style="width: 20%; margin-right: 1%;">
-                        <option value="" style="display: none;">在庫を選択</option>
-                        <option value="active">在庫あり</option>
-                        <option value="">SOLD OUT</option>
-                    </select>
-                    <button class="btn btn-secondary" type="submit">検索</button>
+                    <input class="form-control mr-sm-1" type="checkbox" id="checkbox1" name="statusword" value="active @if (isset($statusword)) {{ $statusword }} @endif">
+                    <label for="checkbox1" style="margin-right: 2%;">在庫あり</label>
+                    <button class="btn btn-secondary btn-sm" type="submit">検索</button>
                 </form>
                 <div class="card-tools">
                     <div class="input-group">
@@ -56,8 +53,8 @@
                             <td>@if($item->status)在庫あり @else <p class="text-danger">SOLD OUT</p> @endif</td>
                             <td>{{ $item->created_at }}</td>
                             <td>{{ $item->updated_at }}</td>
-                            <td><a class="btn btn-secondary btn-sm" href="items/detail/{{ $item->id }}">詳細</a></td>
-                            <td><a class="btn btn-warning btn-sm" href="items/edit/{{ $item->id }}">編集</a></td>
+                            <td><a class="btn btn-secondary btn-sm" href="detail/{{ $item->id }}">詳細</a></td>
+                            <td><a class="btn btn-warning btn-sm" href="edit/{{ $item->id }}">編集</a></td>
                         </tr>
                         @endforeach
                     </tbody>

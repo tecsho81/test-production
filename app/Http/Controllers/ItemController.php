@@ -21,18 +21,18 @@ class ItemController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * 一覧画面表示
-     */
-    public function index()
-    {
-        // 一覧取得
-        // $items = Item::all();
-        $type = Item::TYPE;
-        // 更新日時順・ページネーション
-        $items = DB::table('items')->orderBy('updated_at', 'desc')->paginate(10);
-        return view('item.index', compact('items', 'type'));
-    }
+    // /**
+    //  * 一覧画面表示
+    //  */
+    // public function index()
+    // {
+    //     // 一覧取得
+    //     // $items = Item::all();
+    //     $type = Item::TYPE;
+    //     // 更新日時順・ページネーション
+    //     $items = DB::table('items')->orderBy('updated_at', 'desc')->paginate(10);
+    //     return view('item.index', compact('items', 'type'));
+    // }
 
     /**
      * 検索処理
