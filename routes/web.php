@@ -36,6 +36,8 @@ Route::prefix('items')->group(function () {
     Route::put('/edit/{id}', [App\Http\Controllers\ItemController::class, 'update']);
     // 削除処理
     Route::delete('/edit/{id}', [App\Http\Controllers\ItemController::class, 'destroy'])->name('items.destroy');
-    // キーワード検索
-    Route::get('/search', [App\Http\Controllers\ItemController::class, 'getIndex'])->name('items.search');
+    // 車名検索
+    Route::get('/namesearch', [App\Http\Controllers\ItemController::class, 'nameindex'])->name('name.search');
+    // タイプ検索
+    Route::get('/typesearch', [App\Http\Controllers\ItemController::class, 'typeindex'])->name('type.search');
 });

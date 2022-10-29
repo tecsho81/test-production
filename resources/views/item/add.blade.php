@@ -31,7 +31,7 @@
                     <div class="form-group">
                         <label for="type">タイプ</label>
                         <select class="form-control" name="type">
-                            <option value="" style="display: none;"></option>
+                            <option value="" style="display: none;">タイプを選択</option>
                             @foreach($type as $key => $value)
                             <option value="{{$key}}" {{old('type')==$key ? "selected" : ""}}>{{ $value }}</option>
                             @endforeach

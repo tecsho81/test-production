@@ -36,15 +36,30 @@ class ItemController extends Controller
     }
 
     /**
-     * 検索処理
+     * 車名検索処理
      */
-    public function getIndex(Request $request)
+    public function nameindex(Request $request)
     {
-        $keyword = $request->input('keyword');
+        $nameword = $request->input('nameword');
         $type = Item::TYPE;
         $query = Item::query();
-        if (!empty($keyword)) {
-            $query->where('name', 'like', '%' . $keyword . '%');
+        if (!empty($nameword)) {
+            $query->where('name', 'like', '%' . $nameword . '%');
+        }
+        $items = $query->orderBy('updated_at', 'desc')->paginate(10);
+        return view('item.index', compact('items', 'type'));
+    }
+
+    /**
+     * タイプ検索処理
+     */
+    public function typeindex(Request $request)
+    {
+        $typeword = $request->input('typeword');
+        $type = Item::TYPE;
+        $query = Item::query();
+        if (!empty($typeword)) {
+            $query->where('type', 'like', '%' . $typeword . '%');
         }
         $items = $query->orderBy('updated_at', 'desc')->paginate(10);
         return view('item.index', compact('items', 'type'));
