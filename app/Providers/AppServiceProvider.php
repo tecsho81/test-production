@@ -33,5 +33,10 @@ class AppServiceProvider extends ServiceProvider
 
         // ページネーション
         Paginator::useBootstrap();
+
+        // ペジネーションリンクをhttps対応（.env APP_ENV=localでない場合https化）
+        if (!$this->app->environment('local')) {
+            $this->app['request']->server->set('HTTPS', 'on');
+        }
     }
 }
